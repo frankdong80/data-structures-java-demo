@@ -22,6 +22,12 @@ public class SortArray {
 
   }
 
+  /**
+   * insertion sort
+   * @param a
+   * @param n
+   * @param <T>
+   */
   public static <T extends Comparable<? super T>> void insertionSort(T[] a, int n) {
     insertionSort(a, 0, n - 1);
   }
@@ -68,6 +74,12 @@ public class SortArray {
     }
   }
 
+  /**
+   * selection sort
+   * @param a
+   * @param n
+   * @param <T>
+   */
   public static <T extends Comparable<? super T>> void selectionSort(T[] a, int n) {
 //    for (int index = 0; index < n - 1; index++) {
 //      int indexOfNextSmallest = getIndexOfSmallest(a, index, n - 1);
