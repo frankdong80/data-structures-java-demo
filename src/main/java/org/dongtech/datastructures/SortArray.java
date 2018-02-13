@@ -5,11 +5,6 @@ package org.dongtech.datastructures;
  * Created on 29/01/2018.
  */
 public class SortArray {
-  public static void main(String[] args) {
-    Gadget[] gadgets = new Gadget[10];
-    SortArray.sort(gadgets, 10);
-  }
-
   /**
    * 定义一个泛型方法，该方法要求泛型的实例是一个实现了Comparable接口的类型
    * Comparable<? super T> 表示，这个实例可以不直接实现Comparable接口，而是通过其父类实现Comparable接口
@@ -22,8 +17,38 @@ public class SortArray {
 
   }
 
+  public static <T extends Comparable<? super T>> void shellSort(T[] a, int n) {
+    shellSort(a, 0, n - 1);
+  }
+
+  public static <T extends Comparable<? super T>> void shellSort(T[] a, int first, int last) {
+    if (first < last) {
+      int n = last - first + 1;
+      for (int space = n / 2; space > 0; space = space / 2) {
+        for (int begin = first; begin < first + space; begin++) {
+          incrementalInsertionSort(a, begin, last, space);
+        }
+      }
+    }
+  }
+
+  private static <T extends Comparable<? super T>> void incrementalInsertionSort(T[] a, int first, int last, int
+      space) {
+    int unsorted, index;
+    for (unsorted = first + space; unsorted <= last; unsorted = unsorted + space) {
+      T firstUnsorted = a[unsorted];
+      for (index = unsorted - space; (index >= first) && (firstUnsorted.compareTo(a[index]) < 0); index = index -
+          space) {
+        a[index + space] = a[index];
+      }
+      a[index + space] = firstUnsorted;
+    }
+
+  }
+
   /**
    * insertion sort
+   *
    * @param a
    * @param n
    * @param <T>
@@ -76,6 +101,7 @@ public class SortArray {
 
   /**
    * selection sort
+   *
    * @param a
    * @param n
    * @param <T>
