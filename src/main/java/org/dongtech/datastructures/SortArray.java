@@ -1,5 +1,6 @@
 package org.dongtech.datastructures;
 
+
 /**
  * @author Fuqiang
  * Created on 29/01/2018.
@@ -17,6 +18,24 @@ public class SortArray {
 
   }
 
+
+  public static <T> void sort(T[] a, Comparator<T> comparator) {
+    for (int i = a.length; i >= 0; i--) {
+      for (int j = 1; j < i; j++) {
+        if (comparator.compare(a[j - 1], a[j]) > 0) {
+          swap(a, j - 1, j);
+        }
+      }
+    }
+  }
+
+  private static void swap(Object[] a, int i, int j) {
+    if (i != j) {
+      Object tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+  }
 
   /**
    * 冒泡排序
@@ -44,7 +63,6 @@ public class SortArray {
   }
 
   /**
-   *
    * @param a
    * @param first
    * @param last
@@ -60,14 +78,6 @@ public class SortArray {
       }
     }
     return index;
-  }
-
-  private static void swap(Object[] a, int i, int j) {
-    if (i != j) {
-      Object tmp = a[i];
-      a[i] = a[j];
-      a[j] = tmp;
-    }
   }
 
   public static <T extends Comparable<? super T>> void shellSort(T[] a, int n) {
@@ -217,5 +227,21 @@ public class SortArray {
       }
     }
     return indexOfMin;
+  }
+
+  /**
+   * 检测给定的数组是否有序，左小右大
+   *
+   * @param a
+   * @param <T>
+   * @return
+   */
+  public static <T extends Comparable<? super T>> boolean isSorted(T[] a) {
+    for (int i = 1; i < a.length; i++) {
+      if (a[i - 1].compareTo(a[i]) > 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }
