@@ -17,6 +17,49 @@ public class SortArray {
 
   }
 
+
+  /**
+   * 冒泡排序
+   *
+   * @param a
+   * @param n
+   * @param <T>
+   */
+  public static <T extends Comparable<? super T>> void bubbleSort(T[] a, int n) {
+//    for (int i = n; i >= 0; i--) {
+//      for (int j = 1; j < i; j++) {
+//        if (a[j - 1].compareTo(a[j]) > 0) {
+//          swap(a, j - 1, j);
+//        }
+//      }
+//    }
+    bubbleSort(a, 0, n - 1);
+  }
+
+  public static <T extends Comparable<? super T>> void bubbleSort(T[] a, int first, int last) {
+    if (first < last) {
+      bubble(a, first, last);
+      bubbleSort(a, first, last - 1);
+    }
+  }
+
+  private static <T extends Comparable<? super T>> void bubble(T[] a, int first, int last) {
+    if (first < last) {
+      if (a[first].compareTo(a[first + 1]) > 0) {
+        swap(a, first, first + 1);
+      }
+      bubble(a, first + 1, last);
+    }
+  }
+
+  private static void swap(Object[] a, int i, int j) {
+    if (i != j) {
+      Object tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+  }
+
   public static <T extends Comparable<? super T>> void shellSort(T[] a, int n) {
     shellSort(a, 0, n - 1);
   }
@@ -25,8 +68,9 @@ public class SortArray {
     if (first < last) {
       int n = last - first + 1;
       for (int space = n / 2; space > 0; space = space / 2) {
-        for (int begin = first; begin < first + space; begin++) {
-          incrementalInsertionSort(a, begin, last, space);
+        int tmp = space % 2 == 0 ? space + 1 : space;
+        for (int begin = first; begin < first + tmp; begin++) {
+          incrementalInsertionSort(a, begin, last, tmp);
         }
       }
     }
@@ -100,6 +144,37 @@ public class SortArray {
   }
 
   /**
+   * 优化的选择排序，每次选择中，选出最大值与最小值，分别与数组的首尾元素交换位置
+   *
+   * @param a
+   * @param n
+   * @param <T>
+   */
+  public static <T extends Comparable<? super T>> void selectionSort2(T[] a, int n) {
+    selectionSort2(a, 0, n - 1);
+  }
+
+  private static <T extends Comparable<? super T>> void selectionSort2(T[] a, int first, int last) {
+    if (last > first) {
+      int min = first;
+      int max = first;
+      for (int i = first + 1; i < last; i++) {
+        if (a[i].compareTo(a[min]) < 0) {
+          min = i;
+        } else if (a[i].compareTo(a[max]) > 0) {
+          max = i;
+        }
+      }
+      swap(a, first, min);
+      if (first == max) {
+        max = min;
+      }
+      swap(a, last, max);
+      selectionSort2(a, first + 1, last - 1);
+    }
+  }
+
+  /**
    * selection sort
    *
    * @param a
@@ -132,11 +207,5 @@ public class SortArray {
       }
     }
     return indexOfMin;
-  }
-
-  private static void swap(Object[] a, int i, int j) {
-    Object tmp = a[i];
-    a[i] = a[j];
-    a[j] = tmp;
   }
 }
