@@ -38,18 +38,28 @@ public class SortArray {
 
   public static <T extends Comparable<? super T>> void bubbleSort(T[] a, int first, int last) {
     if (first < last) {
-      bubble(a, first, last);
-      bubbleSort(a, first, last - 1);
+      int index = bubble(a, first, last);
+      bubbleSort(a, first, index);
     }
   }
 
-  private static <T extends Comparable<? super T>> void bubble(T[] a, int first, int last) {
-    if (first < last) {
-      if (a[first].compareTo(a[first + 1]) > 0) {
-        swap(a, first, first + 1);
+  /**
+   *
+   * @param a
+   * @param first
+   * @param last
+   * @param <T>
+   * @return 返回最后一次交换中，左边元素的索引
+   */
+  private static <T extends Comparable<? super T>> int bubble(T[] a, int first, int last) {
+    int index = first;
+    for (int i = first; i < last; i++) {
+      if (a[i].compareTo(a[i + 1]) > 0) {
+        swap(a, i, i + 1);
+        index = i;
       }
-      bubble(a, first + 1, last);
     }
+    return index;
   }
 
   private static void swap(Object[] a, int i, int j) {
