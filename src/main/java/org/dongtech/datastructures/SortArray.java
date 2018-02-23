@@ -6,6 +6,8 @@ package org.dongtech.datastructures;
  * Created on 29/01/2018.
  */
 public class SortArray {
+  private static int MIN_SIZE = 4;
+
   /**
    * 定义一个泛型方法，该方法要求泛型的实例是一个实现了Comparable接口的类型
    * Comparable<? super T> 表示，这个实例可以不直接实现Comparable接口，而是通过其父类实现Comparable接口
@@ -19,7 +21,87 @@ public class SortArray {
   }
 
   /**
-   * 归并排序，效率O(n logn)
+   * 快速排序递归实现
+   *
+   * @param a
+   * @param first
+   * @param last
+   * @param <T>
+   */
+  public static <T extends Comparable<? super T>> void quickSort(T[] a, int first, int last) {
+    if (last - first + 1 < MIN_SIZE) {
+      insertionSort(a, first, last);
+    } else {
+      int pivotIndex = partition(a, first, last);
+      quickSort(a, first, pivotIndex - 1);
+      quickSort(a, pivotIndex, last);
+    }
+  }
+
+  /**
+   * 将数组划分为由支点分隔的两个子数组，左边数组的所有元素小于等于支点，右边数组的所有元素大于等于支点
+   *
+   * @param a
+   * @param first
+   * @param last
+   * @param <T>
+   * @return
+   */
+  private static <T extends Comparable<? super T>> int partition(T[] a, int first, int last) {
+    int mid = (first + last) / 2;
+    sortFirstMiddleLast(a, first, mid, last);
+    swap(a, mid, last - 1);
+    int pivotIndex = last - 1;
+    T pivot = a[pivotIndex];
+    int indexFromLeft = first + 1;
+    int indexFromRight = last - 2;
+    boolean done = false;
+    while (!done) {
+      while (a[indexFromLeft].compareTo(pivot) < 0) {
+        indexFromLeft++;
+      }
+      while (a[indexFromRight].compareTo(pivot) > 0) {
+        indexFromRight--;
+      }
+      assert a[indexFromLeft].compareTo(pivot) >= 0 && a[indexFromRight].compareTo(pivot) <= 0;
+
+      if (indexFromLeft < indexFromRight) {
+        swap(a, indexFromLeft, indexFromRight);
+        indexFromLeft++;
+        indexFromRight--;
+      } else {
+        done = true;
+      }
+    }
+    swap(a, pivotIndex, indexFromLeft);
+    pivotIndex = indexFromLeft;
+    return pivotIndex;
+  }
+
+  /**
+   * 三点取中值支点选择法
+   *
+   * @param a
+   * @param first
+   * @param middle
+   * @param last
+   * @param <T>
+   */
+  private static <T extends Comparable<? super T>> void sortFirstMiddleLast(T[] a, int first, int middle, int last) {
+    order(a, first, middle);
+    order(a, middle, last);
+    order(a, first, middle);
+  }
+
+  private static <T extends Comparable<? super T>> void order(T[] a, int i, int j) {
+    if (a[i].compareTo(a[j]) > 0) {
+      swap(a, i, j);
+    }
+  }
+
+  /**
+   * 归并排序递归实现，效率O(n logn)
+   *
    * @param a
    * @param first
    * @param last
@@ -40,6 +122,10 @@ public class SortArray {
   }
 
   private static <T extends Comparable<? super T>> void merge(T[] a, T[] tempArray, int first, int mid, int last) {
+    if (a[mid].compareTo(a[mid + 1]) <= 0) {
+      //如果左边有序数组的最大值小于等于右边有序数组的最小值,则不执行归并.
+      return;
+    }
     int beginHalf1 = first;
     int beginHalf2 = mid + 1;
     int index = 0;
@@ -62,7 +148,6 @@ public class SortArray {
     }
 
   }
-
 
   /**
    * 一个可以自定定义比较器的冒泡排序法
