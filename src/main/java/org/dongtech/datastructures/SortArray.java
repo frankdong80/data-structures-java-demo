@@ -18,7 +18,59 @@ public class SortArray {
 
   }
 
+  /**
+   * 归并排序，效率O(n logn)
+   * @param a
+   * @param first
+   * @param last
+   * @param <T>
+   */
+  public static <T extends Comparable<? super T>> void mergeSort(T[] a, int first, int last) {
+    T[] tempArray = (T[]) new Comparable[a.length];
+    mergeSort(a, tempArray, first, last);
+  }
 
+  private static <T extends Comparable<? super T>> void mergeSort(T[] a, T[] tempArray, int first, int last) {
+    if (first < last) {
+      int mid = (first + last) / 2;
+      mergeSort(a, tempArray, first, mid);
+      mergeSort(a, tempArray, mid + 1, last);
+      merge(a, tempArray, first, mid, last);
+    }
+  }
+
+  private static <T extends Comparable<? super T>> void merge(T[] a, T[] tempArray, int first, int mid, int last) {
+    int beginHalf1 = first;
+    int beginHalf2 = mid + 1;
+    int index = 0;
+    while (beginHalf1 <= mid && beginHalf2 <= last) {
+      if (a[beginHalf1].compareTo(a[beginHalf2]) < 0) {
+        tempArray[index++] = a[beginHalf1++];
+      } else {
+        tempArray[index++] = a[beginHalf2++];
+      }
+    }
+    while (beginHalf1 <= mid) {
+      tempArray[index++] = a[beginHalf1++];
+    }
+    while (beginHalf2 <= last) {
+      tempArray[index++] = a[beginHalf2++];
+    }
+    index = 0;
+    while (first <= last) {
+      a[first++] = tempArray[index++];
+    }
+
+  }
+
+
+  /**
+   * 一个可以自定定义比较器的冒泡排序法
+   *
+   * @param a
+   * @param comparator
+   * @param <T>
+   */
   public static <T> void sort(T[] a, Comparator<T> comparator) {
     for (int i = a.length; i >= 0; i--) {
       for (int j = 1; j < i; j++) {
