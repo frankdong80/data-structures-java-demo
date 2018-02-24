@@ -381,4 +381,39 @@ public class SortArray {
     }
     return true;
   }
+
+  /**
+   * 基数排序,效率O(n)
+   *
+   * @param a
+   * @param first
+   * @param last
+   * @param maxDigits
+   */
+  public static void radixSort(int[] a, int first, int last, int maxDigits) {
+    int length = last - first + 1;
+    int[][] buckets = new int[10][length];
+    int[] bucketIndex = new int[10];
+    int digit = 0;//当前位
+    while (digit < maxDigits) {
+      int index = first;
+      while (index <= last) {
+        int element = a[index];
+        int digitValue = (element / (int) Math.pow(10, digit)) % 10;
+        buckets[digitValue][bucketIndex[digitValue]] = element;
+        bucketIndex[digitValue]++;
+        index++;
+      }
+      index = first;
+      for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < bucketIndex[i]; j++) {
+          a[index] = buckets[i][j];
+          index++;
+        }
+      }
+      buckets = new int[10][length];//清空
+      bucketIndex=new int[10];//清空
+      digit++;
+    }
+  }
 }
