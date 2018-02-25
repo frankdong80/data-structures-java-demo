@@ -217,6 +217,12 @@ public class SortArray {
     return index;
   }
 
+  /**
+   * 希尔排序
+   * @param a
+   * @param n
+   * @param <T>
+   */
   public static <T extends Comparable<? super T>> void shellSort(T[] a, int n) {
     shellSort(a, 0, n - 1);
   }
