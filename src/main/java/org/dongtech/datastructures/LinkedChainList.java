@@ -23,6 +23,31 @@ public class LinkedChainList<T extends Comparable<? super T>> implements ListInt
     }
   }
 
+  @Override
+  public boolean add(int position, T newEntry) {
+    return false;
+  }
+
+  @Override
+  public T remove(int position) {
+    return null;
+  }
+
+  @Override
+  public int getLength() {
+    return 0;
+  }
+
+  @Override
+  public T getEntry(int position) {
+    return null;
+  }
+
+  @Override
+  public void clear() {
+
+  }
+
   private void insertInOrder(Node nodeToInsert) {
     T item = nodeToInsert.getData();
     Node currentNode = firstNode;

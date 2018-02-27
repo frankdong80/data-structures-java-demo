@@ -14,4 +14,6 @@ public interface ListInterface<T> {
   T getEntry(int position);
 
   void clear();
+
+  boolean isEmpty();
 }

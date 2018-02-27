@@ -29,4 +29,9 @@ public class LList<T extends Comparable<? super T>> implements ListInterface<T> 
   public void clear() {
 
   }
+
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
 }

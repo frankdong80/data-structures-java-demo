@@ -4,15 +4,24 @@ package org.dongtech.datastructures;
  * @author Fuqiang
  * Created on 24/02/2018.
  */
-public class SortedLinkedList<T extends Comparable<? super T>> implements SortedListInterface<T> {
-  private Node firstNode;
-  private int length = 0;
+public class SortedLinkedList<T extends Comparable<? super T>> extends LinkedChainBase<T> implements
+    SortedListInterface<T> {
 
   @Override
   public boolean add(T newEntry) {
+    Node newNode = new Node(newEntry);
+    Node nodeBefore = getNodeBefore(newEntry);
+    if (nodeBefore == null) {
+      addFirstNode(newNode);
+    } else {
+      addAfterNode(nodeBefore, newNode);
+    }
+    return true;
+ /*
     firstNode = add(newEntry, firstNode);
     length++;
     return true;
+    */
 /*
     Node newNode = new Node(newEntry);
     Node nodeBefore = getNodeBefore(newEntry);
@@ -70,6 +79,16 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
     return null;
   }
 
+  private Node getNodeBefore(T entity) {
+    Node current = getFirstNode();
+    Node nodeBefore = null;
+    while (current != null && entity.compareTo(current.getData()) > 0) {
+      nodeBefore = current;
+      current = current.getNext();
+    }
+    return nodeBefore;
+  }
+
   @Override
   public void clear() {
 
@@ -95,6 +114,7 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
 
   }
 
+/*
   private Node add(T newEntry, Node currentNode) {
     if (null == currentNode || newEntry.compareTo(currentNode.getData()) <= 0) {
       currentNode = new Node(newEntry, currentNode);
@@ -104,20 +124,11 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
     }
     return currentNode;
   }
-
-  private Node getNodeBefore(T entity) {
-    Node current = firstNode;
-    Node nodeBefore = null;
-    while (current != null && entity.compareTo(current.getData()) > 0) {
-      nodeBefore = current;
-      current = current.getNext();
-    }
-    return nodeBefore;
-  }
+*/
 
   @Override
   public String toString() {
-    Node current = firstNode;
+    Node current = getFirstNode();
     StringBuilder sb = new StringBuilder();
     while (null != current) {
       sb.append(current.toString()).append(",");
@@ -125,40 +136,5 @@ public class SortedLinkedList<T extends Comparable<? super T>> implements Sorted
     }
     sb.deleteCharAt(sb.length() - 1);
     return "SortedLinkedList{" + sb.toString() + "}";
-  }
-
-  private class Node {
-    private T data;
-    private Node next;
-
-    Node(T data) {
-      this.data = data;
-    }
-
-    Node(T data, Node next) {
-      this.data = data;
-      this.next = next;
-    }
-
-    T getData() {
-      return data;
-    }
-
-    void setData(T data) {
-      this.data = data;
-    }
-
-    Node getNext() {
-      return next;
-    }
-
-    void setNext(Node next) {
-      this.next = next;
-    }
-
-    @Override
-    public String toString() {
-      return data.toString();
-    }
   }
 }
