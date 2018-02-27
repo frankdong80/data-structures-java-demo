@@ -4,30 +4,47 @@ package org.dongtech.datastructures;
  * @author Fuqiang
  * Created on 24/02/2018.
  */
-public class SortedList<T extends Comparable<? super T>> implements SortedListInterface<T> {
+public class SortedList<T extends Comparable<? super T>> extends LList<T> implements SortedListInterface<T> {
+
   @Override
   public boolean add(T newEntry) {
-    return false;
+    int newPosition = Math.abs(getPosition(newEntry));
+    return super.add(newPosition, newEntry);
   }
 
   @Override
   public boolean remove(T anEntry) {
-    return false;
+    boolean result = false;
+    int position = getPosition(anEntry);
+    if (position > 0) {
+      super.remove(position);
+      result = true;
+    }
+    return result;
   }
 
   @Override
   public int getPosition(T anEntry) {
-    return 0;
+    int position = 1;
+    int length = super.getLength();
+    while (position <= length && anEntry.compareTo(super.getEntry(position)) > 0) {
+      position++;
+    }
+    if (position > length || super.getEntry(position).compareTo(anEntry) != 0) {
+      position = -position;
+    }
+    return position;
   }
 
   @Override
   public T getEntry(int givenPosition) {
-    return null;
+    return super.getEntry(givenPosition);
   }
 
   @Override
   public boolean contains(T anEntry) {
-    return false;
+    int position = getPosition(anEntry);
+    return position >= 0;
   }
 
   @Override
@@ -37,12 +54,12 @@ public class SortedList<T extends Comparable<? super T>> implements SortedListIn
 
   @Override
   public void clear() {
-
+    super.clear();
   }
 
   @Override
   public int getLength() {
-    return 0;
+    return super.getLength();
   }
 
   @Override
