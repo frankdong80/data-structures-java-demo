@@ -1,5 +1,7 @@
-package org.dongtech.datastructures;
+package org.dongtech.datastructures.list;
 
+
+import org.dongtech.datastructures.Comparator;
 
 /**
  * @author Fuqiang

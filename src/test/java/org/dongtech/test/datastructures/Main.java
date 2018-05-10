@@ -1,6 +1,6 @@
 package org.dongtech.test.datastructures;
 
-import org.dongtech.datastructures.ListInterface;
+import org.dongtech.datastructures.list.ListInterface;
 
 import java.util.Arrays;
 

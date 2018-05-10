@@ -1,4 +1,4 @@
-package org.dongtech.datastructures;
+package org.dongtech.datastructures.list;
 
 /**
  * @author Fuqiang
@@ -17,41 +17,6 @@ public class SortedLinkedList<T extends Comparable<? super T>> extends LinkedCha
       addAfterNode(nodeBefore, newNode);
     }
     return true;
- /*
-    firstNode = add(newEntry, firstNode);
-    length++;
-    return true;
-    */
-/*
-    Node newNode = new Node(newEntry);
-    Node nodeBefore = getNodeBefore(newEntry);
-    if (null == nodeBefore) {
-      newNode.setNext(firstNode);
-      firstNode = newNode;
-    } else {
-      Node nodeAfter = nodeBefore.getNext();
-      newNode.setNext(nodeAfter);
-      nodeBefore.setNext(newNode);
-    }
-    length++;
-    return true;
-*/
-/*
-   Node current = firstNode;
-    Node preNode = null;
-    while (null != current && current.getData().compareTo(newEntry) < 0) {
-      preNode = current;
-      current = current.getNext();
-    }
-    Node newNode = new Node(newEntry, current);
-    if (null == preNode) {
-      firstNode = newNode;
-    } else {
-      preNode.setNext(newNode);
-    }
-    length++;
-    return true;
-*/
   }
 
   @Override
@@ -113,18 +78,6 @@ public class SortedLinkedList<T extends Comparable<? super T>> extends LinkedCha
   public void display() {
 
   }
-
-/*
-  private Node add(T newEntry, Node currentNode) {
-    if (null == currentNode || newEntry.compareTo(currentNode.getData()) <= 0) {
-      currentNode = new Node(newEntry, currentNode);
-    } else {
-      Node nodeAfter = add(newEntry, currentNode.getNext());
-      currentNode.setNext(nodeAfter);
-    }
-    return currentNode;
-  }
-*/
 
   @Override
   public String toString() {

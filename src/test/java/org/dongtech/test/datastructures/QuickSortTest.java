@@ -1,6 +1,6 @@
 package org.dongtech.test.datastructures;
 
-import org.dongtech.datastructures.SortArray;
+import org.dongtech.datastructures.list.SortArray;
 
 /**
  * @author Fuqiang

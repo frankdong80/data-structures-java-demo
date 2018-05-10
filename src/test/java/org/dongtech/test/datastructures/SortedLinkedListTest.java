@@ -1,7 +1,7 @@
 package org.dongtech.test.datastructures;
 
-import org.dongtech.datastructures.SortedLinkedList;
-import org.dongtech.datastructures.SortedListInterface;
+import org.dongtech.datastructures.list.SortedLinkedList;
+import org.dongtech.datastructures.list.SortedListInterface;
 
 /**
  * @author Fuqiang

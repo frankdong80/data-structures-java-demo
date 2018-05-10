@@ -1,4 +1,4 @@
-package org.dongtech.datastructures;
+package org.dongtech.datastructures.list;
 
 import java.io.Serializable;
 

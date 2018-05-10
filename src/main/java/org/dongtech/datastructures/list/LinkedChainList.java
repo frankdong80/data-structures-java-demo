@@ -1,4 +1,4 @@
-package org.dongtech.datastructures;
+package org.dongtech.datastructures.list;
 
 /**
  * @author Fuqiang
@@ -46,6 +46,11 @@ public class LinkedChainList<T extends Comparable<? super T>> implements ListInt
   @Override
   public void clear() {
 
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return false;
   }
 
   private void insertInOrder(Node nodeToInsert) {
