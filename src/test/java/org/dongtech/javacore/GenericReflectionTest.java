@@ -1,4 +1,4 @@
-package org.dongtech.test.javacore;
+package org.dongtech.javacore;
 
 import java.lang.reflect.*;
 import java.util.Arrays;

@@ -1,7 +1,5 @@
-package org.dongtech.test.javacore;
+package org.dongtech.javacore;
 
-import org.dongtech.javacore.Employee;
-import org.dongtech.javacore.Manager;
 import org.dongtech.javacore.generic.Pair;
 import org.dongtech.javacore.generic.PairAlg;
 

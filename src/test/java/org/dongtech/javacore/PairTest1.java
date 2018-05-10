@@ -1,4 +1,4 @@
-package org.dongtech.test.javacore;
+package org.dongtech.javacore;
 
 import org.dongtech.javacore.generic.ArrayAlg;
 import org.dongtech.javacore.generic.Pair;

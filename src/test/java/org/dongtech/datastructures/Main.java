@@ -1,4 +1,4 @@
-package org.dongtech.test.datastructures;
+package org.dongtech.datastructures;
 
 import org.dongtech.datastructures.list.ListInterface;
 
