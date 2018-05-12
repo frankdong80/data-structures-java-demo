@@ -21,10 +21,12 @@ public class BallComponent extends JPanel {
     repaint();
   }
 
+  @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
     for (Ball b : balls) {
+      g2.setColor(b.getColor());
       g2.fill(b.getShape());
     }
 

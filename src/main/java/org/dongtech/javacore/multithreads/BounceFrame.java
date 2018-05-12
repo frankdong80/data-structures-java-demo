@@ -33,13 +33,13 @@ public class BounceFrame extends JFrame {
 
   }
 
-  public void addButton(Container c, String title, ActionListener listener) {
+  private void addButton(Container c, String title, ActionListener listener) {
     JButton button = new JButton(title);
     c.add(button);
     button.addActionListener(listener);
   }
 
-  public void addBall() {
+  private void addBall() {
     Ball b = new Ball();
     comp.add(b);
     BallRunnable runnable = new BallRunnable(b, comp);
@@ -48,7 +48,7 @@ public class BounceFrame extends JFrame {
     threads.add(runnable);
   }
 
-  public void clear() {
+  private void clear() {
     while (threads.size() > 0) {
       threads.remove(0).stop();
     }

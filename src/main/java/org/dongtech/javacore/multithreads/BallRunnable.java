@@ -24,14 +24,15 @@ public class BallRunnable implements Runnable {
 
   @Override
   public void run() {
-    try {
       while (flag) {
         ball.move(component.getBounds());
         component.repaint();
-        Thread.sleep(DELAY);
+        System.out.printf("Thread %s repaint\n", Thread.currentThread().getId());
+        try {
+          Thread.sleep(DELAY);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
       }
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 }
