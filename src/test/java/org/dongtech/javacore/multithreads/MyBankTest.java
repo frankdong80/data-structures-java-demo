@@ -19,7 +19,11 @@ class MyBankTest {
 
   @Test
   void transfer() {
-    this.bank.transfer(0, 1, 100);
+    try {
+      this.bank.transfer(0, 1, 100);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     assertEquals(50, this.bank.getBalance(0));
   }
 
