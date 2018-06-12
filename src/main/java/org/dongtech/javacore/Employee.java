@@ -7,10 +7,13 @@ import java.util.GregorianCalendar;
  * @author Fuqiang
  * Created on 29/01/2018.
  */
-public class Employee {
+public class Employee  {
   private String name;
   private double salary;
   private Date hireDay;
+
+  public Employee() {
+  }
 
   public Employee(String n, double s, int year, int month, int day) {
     name = n;

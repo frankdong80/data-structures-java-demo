@@ -1,5 +1,7 @@
 package org.dongtech.javacore.generic;
 
+import org.dongtech.javacore.Boss;
+
 /**
  * @author Fuqiang
  * Created on 29/01/2018.
@@ -7,6 +9,10 @@ package org.dongtech.javacore.generic;
 public class Pair<T> {
   private T first;
   private T second;
+
+  public static void main(String[] args) {
+    Pair<Boss>  bossPair = new Pair<>();
+  }
 
   public Pair() {
     first = null;
